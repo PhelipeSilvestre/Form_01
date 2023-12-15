@@ -18,8 +18,33 @@ function checkInputs() {
 
   if (usernameValue === "") {
     setErrorFor(username, "O nome de usuário é obrigatório");
+  } else {
+    setSuccessFor(username);
   }
   
+  if (emailValue === "") {
+    setErrorFor(email, "O endereço de email é obrigatório");    
+  } else if (!checkEmail(emailValue)) {
+    setErrorFor(email, "Por favor, insira um email valido");
+  } else {
+    setSuccessFor(email);
+  }
+  
+  if (passwordValue === "") {
+    setErrorFor(password, "A senha é obrigatória");
+  } else if (passwordValue.length < 8) {
+    setErrorFor(password, "A senha deve ter pelo menos 8 digitos");
+  } else {
+    setSuccessFor(password);
+  }
+  
+  if (passwordConfirmationValue === "") {
+    setErrorFor(passwordConfirmation, "A confirmação da senha é obrigatória");
+  } else if (passwordValue !== passwordConfirmationValue) {
+    setErrorFor(passwordConfirmation, "As senhas devem ser iguais");
+  } else {
+    setSuccessFor(passwordConfirmation);
+  }
 }
 
 function setErrorFor(input, message) {
@@ -39,3 +64,8 @@ function setSuccessFor(input) {
   // Adiciona a classe de sucesso
   formControl.className = "form-control success";
 }
+
+function checkEmail(email) {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      email
+    )};
