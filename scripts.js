@@ -21,15 +21,15 @@ function checkInputs() {
   } else {
     setSuccessFor(username);
   }
-  
+
   if (emailValue === "") {
-    setErrorFor(email, "O endereço de email é obrigatório");    
+    setErrorFor(email, "O endereço de email é obrigatório");
   } else if (!checkEmail(emailValue)) {
     setErrorFor(email, "Por favor, insira um email valido");
   } else {
     setSuccessFor(email);
   }
-  
+
   if (passwordValue === "") {
     setErrorFor(password, "A senha é obrigatória");
   } else if (passwordValue.length < 8) {
@@ -37,7 +37,7 @@ function checkInputs() {
   } else {
     setSuccessFor(password);
   }
-  
+
   if (passwordConfirmationValue === "") {
     setErrorFor(passwordConfirmation, "A confirmação da senha é obrigatória");
   } else if (passwordValue !== passwordConfirmationValue) {
@@ -45,6 +45,16 @@ function checkInputs() {
   } else {
     setSuccessFor(passwordConfirmation);
   }
+}
+
+const formControl = form.querySelectorAll(".form-control");
+
+const formIsValid = [...formControl].every((formControl) => {
+  return (formControl.className = "form-control success");
+});
+
+if (formIsValid) {
+  console.log("O formulário é valido");
 }
 
 function setErrorFor(input, message) {
@@ -66,6 +76,7 @@ function setSuccessFor(input) {
 }
 
 function checkEmail(email) {
-    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-      email
-    )};
+  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    email
+  );
+}
